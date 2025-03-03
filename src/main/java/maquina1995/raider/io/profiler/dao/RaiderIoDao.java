@@ -1,5 +1,6 @@
 package maquina1995.raider.io.profiler.dao;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -32,7 +33,8 @@ public class RaiderIoDao {
 	 * @param nombreTextField
 	 * @return
 	 */
-	public Profile callRaiderIoApi(String region, String reino, String nombre) {
+	@Cacheable("characterInfoCache")
+	public Profile characterInfoCall(String region, String reino, String nombre) {
 
 		return webClient.get()
 				.uri("/profile?region=" + region + "&realm=" + reino + "&name=" + nombre + "&fields=raid_progression")

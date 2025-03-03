@@ -103,7 +103,7 @@ public class ProfileController extends VerticalLayout {
 		// Listener del boton
 		consultarButton.addClickListener(e -> {
 
-			Profile response = this.raiderIoDao.callRaiderIoApi(regionTextField.getValue(), reinoTextField.getValue(),
+			Profile response = this.raiderIoDao.characterInfoCall(regionTextField.getValue(), reinoTextField.getValue(),
 					nombreTextField.getValue());
 
 			// Rellenar datos
