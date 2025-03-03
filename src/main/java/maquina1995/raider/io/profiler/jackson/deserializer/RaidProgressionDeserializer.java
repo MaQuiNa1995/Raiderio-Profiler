@@ -1,4 +1,4 @@
-package maquina1995.jackson.deserializer;
+package maquina1995.raider.io.profiler.jackson.deserializer;
 
 import java.io.IOException;
 
@@ -8,10 +8,10 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import maquina1995.dto.BlackRockDepths;
-import maquina1995.dto.LiberationOfUndermine;
-import maquina1995.dto.NerubarPalace;
-import maquina1995.dto.RaidProgression;
+import maquina1995.raider.io.profiler.dto.BlackRockDepths;
+import maquina1995.raider.io.profiler.dto.LiberationOfUndermine;
+import maquina1995.raider.io.profiler.dto.NerubarPalace;
+import maquina1995.raider.io.profiler.dto.RaidProgression;
 
 public class RaidProgressionDeserializer extends JsonDeserializer<RaidProgression> {
 

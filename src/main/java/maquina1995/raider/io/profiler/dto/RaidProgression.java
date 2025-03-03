@@ -1,4 +1,4 @@
-package maquina1995.dto;
+package maquina1995.raider.io.profiler.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.Getter;
 import lombok.Setter;
-import maquina1995.jackson.deserializer.RaidProgressionDeserializer;
+import maquina1995.raider.io.profiler.jackson.deserializer.RaidProgressionDeserializer;
 
 @Getter
 @Setter

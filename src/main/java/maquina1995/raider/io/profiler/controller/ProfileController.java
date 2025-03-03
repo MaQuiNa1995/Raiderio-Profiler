@@ -1,8 +1,4 @@
-package maquina1995.controller;
-
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.client.WebClient;
+package maquina1995.raider.io.profiler.controller;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
@@ -14,8 +10,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 
-import maquina1995.dto.Profile;
-import maquina1995.dto.RaidProgression;
+import maquina1995.raider.io.profiler.dao.RaiderIoDao;
+import maquina1995.raider.io.profiler.dto.Profile;
+import maquina1995.raider.io.profiler.dto.RaidProgression;
 
 /**
  * Controller
@@ -23,18 +20,16 @@ import maquina1995.dto.RaidProgression;
  * <a href="http://localhost:8080/datos-personaje">Ruta</a>
  * 
  * @author MaQuiNa1995
- *
  */
 @SpringComponent
 @Route("/datos-personaje")
 public class ProfileController extends VerticalLayout {
 
-	/**
-	 * Respuesta del servidor en formato {@link Profile}
-	 */
-	private Profile response;
+	private RaiderIoDao raiderIoDao;
 
-	public ProfileController() {
+	public ProfileController(RaiderIoDao raiderIoDao) {
+
+		this.raiderIoDao = raiderIoDao;
 
 		// --- Layout de introduccion de datos ---
 		HorizontalLayout inputLayout = new HorizontalLayout();
@@ -53,7 +48,7 @@ public class ProfileController extends VerticalLayout {
 		// --- Layout de muestra de datos ---
 		HorizontalLayout dataLayout = new HorizontalLayout();
 		dataLayout.setVisible(false);
-		
+
 		// -- Izquierda
 		Image retratoImagen = new Image();
 		retratoImagen.setWidth("100px");
@@ -73,13 +68,13 @@ public class ProfileController extends VerticalLayout {
 		NativeLabel sexoLabel = new NativeLabel();
 		NativeLabel puntosLogrosLabel = new NativeLabel();
 		bottomDataLayout.add(sexoLabel, puntosLogrosLabel);
-		
+
 		bottomDataLayout.getStyle()
 				.set("margin", "0 auto");
-		
+
 		// Adicion a la layout del centro
 		centerDataLayout.add(topDataLayout, bottomDataLayout);
-		
+
 		// -- Derecha
 		Image faccionImagen = new Image();
 		faccionImagen.setWidth("100px");
@@ -104,17 +99,12 @@ public class ProfileController extends VerticalLayout {
 
 		// Adicion a la layoutPrincipal
 		add(generalTabs);
-		
-		// Listener del boton 
+
+		// Listener del boton
 		consultarButton.addClickListener(e -> {
 
-			// Llamada al api
-			this.response = this.createWebClient().get()
-					.uri("/profile?region=" + regionTextField.getValue() + "&realm=" + reinoTextField.getValue()
-							+ "&name=" + nombreTextField.getValue() + "&fields=raid_progression")
-					.retrieve()
-					.bodyToMono(Profile.class)
-					.block();
+			Profile response = this.raiderIoDao.callRaiderIoApi(regionTextField.getValue(), reinoTextField.getValue(),
+					nombreTextField.getValue());
 
 			// Rellenar datos
 			retratoImagen.setSrc(response.getThumbnailUrl());
@@ -145,19 +135,5 @@ public class ProfileController extends VerticalLayout {
 			dataLayout.setVisible(true);
 			generalTabs.setVisible(true);
 		});
-
-	}
-
-	/**
-	 * Creacion del Webclient primigenio para llamar al api
-	 * 
-	 * @return {@link WebClient}
-	 */
-	private WebClient createWebClient() {
-		WebClient webClient = WebClient.builder()
-				.baseUrl("https://raider.io/api/v1/characters")
-				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-				.build();
-		return webClient;
 	}
 }

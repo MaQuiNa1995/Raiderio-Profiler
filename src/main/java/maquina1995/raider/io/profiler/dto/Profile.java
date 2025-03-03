@@ -1,4 +1,4 @@
-package maquina1995.dto;
+package maquina1995.raider.io.profiler.dto;
 
 import org.apache.commons.lang3.StringUtils;
 

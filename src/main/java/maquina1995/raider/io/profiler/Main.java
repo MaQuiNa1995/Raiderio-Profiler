@@ -1,4 +1,4 @@
-package maquina1995;
+package maquina1995.raider.io.profiler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
