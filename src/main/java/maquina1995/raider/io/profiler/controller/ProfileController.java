@@ -94,8 +94,8 @@ public class ProfileController extends VerticalLayout {
 		generalTabs.add("Palacio Nerub'ar", progresoPalacioNerubarLabel);
 		NativeLabel progresoProfundidadesRocaNegraLabel = new NativeLabel();
 		generalTabs.add("Profundidades De Roca Negra", progresoProfundidadesRocaNegraLabel);
-		NativeLabel progresoLiberacionMinaLabel = new NativeLabel();
-		generalTabs.add("Liberación De La Mina", progresoLiberacionMinaLabel);
+		NativeLabel progresoLiberacionMinahondaLabel = new NativeLabel();
+		generalTabs.add("Liberación De Minahonda", progresoLiberacionMinahondaLabel);
 
 		// Adicion a la layoutPrincipal
 		add(generalTabs);
@@ -128,7 +128,7 @@ public class ProfileController extends VerticalLayout {
 					.getSummary());
 			progresoProfundidadesRocaNegraLabel.setText(raidProgression.getBlackRockDepths()
 					.getSummary());
-			progresoLiberacionMinaLabel.setText(raidProgression.getLiberationOfUndermine()
+			progresoLiberacionMinahondaLabel.setText(raidProgression.getLiberationOfUndermine()
 					.getSummary());
 			generalTabs.setSelectedIndex(0);
 
